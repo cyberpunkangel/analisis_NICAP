@@ -49,9 +49,9 @@ def obtener_datos_y_graficos():
     )
 
     fig.update_layout(
-        title="NICAP Actual por Entidad",
+        title="Histórico de NICAP por Entidad",
         xaxis_title="Periodo",
-        yaxis_title="NICAP Actual",
+        yaxis_title="NICAP",
         legend_title_text="Entidades",
         xaxis=dict(tickangle=45),
     )
@@ -69,5 +69,19 @@ def obtener_datos_y_graficos():
 
     # Convertir DataFrame a HTML
     tabla_html = df_tabla.to_html(classes="table table-striped", index=False)
+    
 
-    return tabla_html, grafico_html
+    ### Datos para el gráfico de pastel
+    df['Fecha'] = pd.to_datetime(df['Fecha'], format='%Y-%m')
+    # Obtener el periodo más reciente
+    periodo_mas_reciente = df['Fecha'].max()
+    # Filtrar el DataFrame para incluir solo el periodo más reciente
+    df_periodo_actual = df[df['Fecha'] == periodo_mas_reciente]
+    fig_pie = px.pie(df_periodo_actual, names='Entidad', values='NICAP_Actual', title=f'Distribución de NICAP actual por Entidad en {periodo_mas_reciente.strftime("%Y-%m")}')
+    
+    # Convertir el gráfico a URI para usar en HTML
+    grafico_pie_uri = fig_pie.to_html(full_html=False)
+    ###
+
+    return tabla_html, grafico_html, grafico_pie_uri
+

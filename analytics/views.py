@@ -6,10 +6,11 @@ from django.conf import settings
 from .scripts.analisis_nicap import obtener_datos_y_graficos
 
 def analisis_nicap(request):
-    tabla_html, grafico_uri = obtener_datos_y_graficos()
+    tabla_html, grafico_uri, grafico_pie_uri = obtener_datos_y_graficos()
     contexto = {
         "tabla": tabla_html,
         "grafico": grafico_uri,
+        "grafico_pie": grafico_pie_uri,
     }
     return render(request, "nicap.html", contexto)
 
