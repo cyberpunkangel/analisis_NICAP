@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block background %}{% load static %}{% static 'img/nicap_estadistica.jpg' %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Análisis NICAP</h1>
+    <br>
+    <h2>¿Qué es el NICAP?</h2>
+    <p>
+        El NICAP (Nivel de Capitalización) es un indicador financiero utilizado para evaluar la solidez y estabilidad de las instituciones financieras. 
+        Este índice refleja la capacidad de una entidad para absorber pérdidas y continuar operando bajo condiciones económicas adversas. 
+        Un NICAP más alto sugiere una mayor capacidad de resistencia financiera, mientras que un índice más bajo puede indicar riesgos potenciales. 
+        Es esencial para los inversores, reguladores y analistas financieros al tomar decisiones informadas sobre la viabilidad y sostenibilidad de una institución.
+    </p>
+    <br>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <table class="table table-bordered tabla-categorias">
+                <thead>
+                    <tr style="background-color: #003366; color: white;">
+                        <th>CATEGORÍAS:</th>
+                        <th>RANGOS:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>NICAP &ge; 131%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>NICAP &ge; 100% y &lt; 131%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>NICAP &ge; 56% y &lt; 100%</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>NICAP &lt; 56%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <div class="contenedor-tabla">
+                <div class="tabla-datos">
+                    {{ tabla|safe }}
+                </div>
+            </div>
+            <br>
+            <a href="{% url 'descargar_csv' %}" class="btn btn-primary cursor">
+                Descargar CSV
+            </a>
+        </div>
+    </div>
+    <br>
+    <div>
+        <h2>Gráfico de NICAP</h2>
+        {{ grafico|safe }}
+    </div>
+    <br>
+</div>
+{% endblock %}
