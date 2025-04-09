@@ -21,5 +21,5 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('analytics.urls')),  # Incluye las URLs de 'analytics'
+    path('analytics/', include('analytics.urls')),  # Incluye las URLs de 'analytics'
 ]
